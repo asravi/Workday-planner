@@ -4,15 +4,15 @@ $(document).ready(function() {
   const test = false;
 
   // get times from moment
-  const now = moment().format('MM Do YYYY');
+  const now = moment().format('MM Do ');
 
   // commented out for test in non-standard hours
-  let nowHour24 = moment().format('H');
+  let currentHour24 = moment().format('H');
   let nowHour12 = moment().format('h');
 
   // set times for tesitng after hours
   if (test) {
-    nowHour24 = 13;
+    currentHour24 = 13;
     nowHour12 = 1;
   }
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
   
   // using font awesome icon https://fontawesome.com/license
   // change description here - none
-  const saveIcon = "./images/save-regular.svg"; 
+  // const saveIcon = "./images/save-regular.svg"; 
 
   // Get stored todos from localStorage
   // Parsing the JSON string to an object
@@ -30,14 +30,14 @@ $(document).ready(function() {
   if (test) { console.log(storedPlans); }
 
   // If plans were retrieved from localStorage, update the plan array to it
-  if (storedPlans !== null) {
-    planTextArr = storedPlans;
-  } else {
+   if (storedPlans !== null) {
+     planTextArr = storedPlans;
+   } else {
     // this should only occur on first time the app is loaded in the browser
     // helpfully remind user that lunch is important
-    planTextArr = new Array(9);
-    planTextArr[4] = "Picnic lunch outside";
-  }
+     planTextArr = new Array(9);
+    
+   }
 
   if (test) { console.log("full array of plned text",planTextArr); }
 
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 
   // build calendar by row for fix set of hours
-  for (let hour = 9; hour <= 17; hour++) {
+  for (let hour = 9; hour <= 19; hour++) {
     // index for array use offset from hour
     let index = hour - 9;
     
@@ -133,18 +133,18 @@ $(document).ready(function() {
   // function to update row color
   function updateRowColor ($hourRow,hour) { 
 
-    if (test) { console.log("rowColor ",nowHour24, hour); }
+    if (test) { console.log("rowColor ",currentHour24, hour); }
 
-    if ( hour < nowHour24) {
+    if ( hour < currentHour24) {
       // $hourRow.css('')
       if (test) { console.log("lessThan"); }
-      $hourRow.css("background-color","lightgrey")
-    } else if ( hour > nowHour24) {
+      $hourRow.css("background-color","darkgreen")
+    } else if ( hour > currentHour24) {
       if (test) { console.log("greaterthan"); }
-      $hourRow.css("background-color","lightgreen")
+      $hourRow.css("background-color","lightblue")
     } else {
-      if (test) { console.log("eqaul"); }
-      $hourRow.css("background-color","tomato")
+      if (test) { console.log("equal"); }
+      $hourRow.css("background-color","yellow")
     }
   };
 
